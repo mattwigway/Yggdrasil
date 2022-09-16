@@ -5,8 +5,8 @@ version = v"1.8.5"
 
 # Collection of sources required to build LibSpatialIndex
 sources = [
-    ArchiveSource("http://download.osgeo.org/libspatialindex/spatialindex-src-1.8.5.tar.bz2",
-        "31ec0a9305c3bd6b4ad60a5261cba5402366dd7d1969a8846099717778e9a50a"),
+    ArchiveSource("https://github.com/libspatialindex/libspatialindex/releases/download/1.9.3/spatialindex-src-1.9.3.tar.bz2",
+        "4a529431cfa80443ab4dcd45a4b25aebbabe1c0ce2fa1665039c80e999dcc50a"),
     DirectorySource("./patches"),
 ]
 
@@ -38,7 +38,7 @@ install_license COPYING
 
 # These are the platforms we will build for by default, unless further
 # platforms are passed in on the command line
-platforms = expand_cxxstring_abis(supported_platforms())
+platforms = expand_cxxstring_abis(supported_platforms(; experimental=true))
 
 # The products that we will ensure are always built
 products = [
@@ -50,4 +50,4 @@ products = [
 dependencies = []
 
 # Build the tarballs, and possibly a `build.jl` as well.
-build_tarballs(ARGS, name, version, sources, script, platforms, products, dependencies)
+build_tarballs(ARGS, name, version, sources, script, platforms, products, dependencies; julia_compat="1.6")
